@@ -120,6 +120,8 @@ impl Drop for Fvad {
     }
 }
 
+unsafe impl Send for Fvad {}
+
 #[cfg(test)]
 mod test {
     use super::*;
