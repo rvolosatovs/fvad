@@ -98,7 +98,7 @@ impl Fvad {
 
     /// Reinitializes a VAD instance, clearing all state and resetting mode and
     /// sample rate to defaults.
-    pub fn reset(&mut self) {
+    pub fn reset(self) {
         unsafe { ffi::fvad_reset(self.fvad) }
     }
 
@@ -109,7 +109,7 @@ impl Fvad {
     /// increased with increasing mode. As a consequence also the missed detection
     /// rate goes up.
     /// The default mode is Mode::Quality.
-    pub fn set_mode(&mut self, mode: Mode) -> &mut Self {
+    pub fn set_mode(self, mode: Mode) -> Self {
         let v = mode as i32;
         match unsafe { ffi::fvad_set_mode(self.fvad, v) } {
             0 => self,
@@ -122,7 +122,7 @@ impl Fvad {
     ///
     /// Note that internally all processing will be done 8000 Hz; input data in higher
     /// sample rates will just be downsampled first.
-    pub fn set_sample_rate(&mut self, sample_rate: SampleRate) -> &mut Self {
+    pub fn set_sample_rate(self, sample_rate: SampleRate) -> Self {
         let v = sample_rate as i32;
         match unsafe { ffi::fvad_set_sample_rate(self.fvad, v) } {
             0 => self,
