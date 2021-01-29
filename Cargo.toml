@@ -1,7 +1,7 @@
 [package]
 name = "fvad"
 version = "0.1.0"
-authors = ["Roman Volosatovs <rvolosatovs@riseup.net>", "kaegi <kaegi.dev@gmail.com>"]
+authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
 edition = "2018"
 description = "VAD library based on WebRTC's VAD engine"
 repository = "https://github.com/rvolosatovs/fvad"
