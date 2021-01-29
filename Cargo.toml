@@ -9,3 +9,6 @@ documentation = "https://docs.rs/fvad"
 license = "MIT OR Apache-2.0"
 keywords = ["vad", "fvad"]
 categories = ["multimedia::audio"]
+
+[dependencies]
+libfvad-sys = "1.0.0"
