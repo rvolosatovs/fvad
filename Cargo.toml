@@ -1,0 +1,10 @@
+[package]
+name = "fvad"
+version = "0.1.0"
+authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
+edition = "2018"
+description = "VAD library based on WebRTC's VAD engine"
+repository = "https://github.com/rvolosatovs/fvad"
+license = "MIT OR Apache-2.0"
+keywords = ["vad", "fvad"]
+categories = ["multimedia::audio"]
