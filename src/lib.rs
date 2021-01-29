@@ -86,8 +86,8 @@ impl Fvad {
     /// Creates and initializes a VAD instance.
     ///
     /// Returns:
-    /// - Some(Self) wrapping a pointer to the new VAD instance on success
-    /// - None in case of a memory allocation error
+    /// - `Some(Self)` wrapping a pointer to the new VAD instance on success
+    /// - `None` in case of a memory allocation error
     pub fn new() -> Option<Self> {
         let fvad = unsafe { ffi::fvad_new() };
         match fvad.is_null() {
@@ -108,7 +108,7 @@ impl Fvad {
     /// Put in other words the probability of being speech when the VAD returns 1 is
     /// increased with increasing mode. As a consequence also the missed detection
     /// rate goes up.
-    /// The default mode is Mode::Quality.
+    /// The default mode is `Mode::Quality`.
     pub fn set_mode(self, mode: Mode) -> Self {
         let v = mode as i32;
         match unsafe { ffi::fvad_set_mode(self.fvad, v) } {
@@ -141,9 +141,9 @@ impl Fvad {
     /// must be either 80, 160 or 240.
     ///
     /// Returns:             
-    /// - Some(true) on active voice detection
-    /// - Some(false) on no active voice detection
-    /// - None on invalid frame length
+    /// - `Some(true)` on active voice detection
+    /// - `Some(false)` on no active voice detection
+    /// - `None` on invalid frame length
     pub fn is_voice_frame(&mut self, frame: &[i16]) -> Option<bool> {
         match unsafe { ffi::fvad_process(self.fvad, frame.as_ptr(), frame.len() as u64) } {
             -1 => None,
