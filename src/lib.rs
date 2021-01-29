@@ -18,10 +18,10 @@ pub enum SampleRate {
     Rate48kHz = 48000,
 }
 
-impl TryFrom<u16> for SampleRate {
+impl TryFrom<u64> for SampleRate {
     type Error = ();
 
-    fn try_from(n: u16) -> Result<Self, Self::Error> {
+    fn try_from(n: u64) -> Result<Self, Self::Error> {
         match n {
             8000 => Ok(SampleRate::Rate8kHz),
             16000 => Ok(SampleRate::Rate16kHz),
@@ -29,6 +29,52 @@ impl TryFrom<u16> for SampleRate {
             48000 => Ok(SampleRate::Rate48kHz),
             _ => Err(()),
         }
+    }
+}
+
+impl TryFrom<u32> for SampleRate {
+    type Error = ();
+
+    fn try_from(n: u32) -> Result<Self, Self::Error> {
+        SampleRate::try_from(n as u64)
+    }
+}
+
+impl TryFrom<u16> for SampleRate {
+    type Error = ();
+
+    fn try_from(n: u16) -> Result<Self, Self::Error> {
+        SampleRate::try_from(n as u64)
+    }
+}
+
+impl TryFrom<i64> for SampleRate {
+    type Error = ();
+
+    fn try_from(n: i64) -> Result<Self, Self::Error> {
+        match n {
+            8000 => Ok(SampleRate::Rate8kHz),
+            16000 => Ok(SampleRate::Rate16kHz),
+            32000 => Ok(SampleRate::Rate32kHz),
+            48000 => Ok(SampleRate::Rate48kHz),
+            _ => Err(()),
+        }
+    }
+}
+
+impl TryFrom<i32> for SampleRate {
+    type Error = ();
+
+    fn try_from(n: i32) -> Result<Self, Self::Error> {
+        SampleRate::try_from(n as i64)
+    }
+}
+
+impl TryFrom<i16> for SampleRate {
+    type Error = ();
+
+    fn try_from(n: i16) -> Result<Self, Self::Error> {
+        SampleRate::try_from(n as i64)
     }
 }
 
@@ -128,8 +174,18 @@ mod test {
 
     #[test]
     fn try_into_sample_rate() {
-        assert_eq!(SampleRate::try_from(7999), Err(()));
-        assert_eq!(SampleRate::try_from(8000), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(7999i16), Err(()));
+        assert_eq!(SampleRate::try_from(7999i32), Err(()));
+        assert_eq!(SampleRate::try_from(7999i64), Err(()));
+        assert_eq!(SampleRate::try_from(7999u16), Err(()));
+        assert_eq!(SampleRate::try_from(7999u32), Err(()));
+        assert_eq!(SampleRate::try_from(7999u64), Err(()));
+        assert_eq!(SampleRate::try_from(8000i16), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(8000i32), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(8000i64), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(8000u16), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(8000u32), Ok(SampleRate::Rate8kHz));
+        assert_eq!(SampleRate::try_from(8000u64), Ok(SampleRate::Rate8kHz));
         assert_eq!(SampleRate::try_from(16000), Ok(SampleRate::Rate16kHz));
         assert_eq!(SampleRate::try_from(32000), Ok(SampleRate::Rate32kHz));
         assert_eq!(SampleRate::try_from(48000), Ok(SampleRate::Rate48kHz));
