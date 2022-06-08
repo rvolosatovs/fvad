@@ -145,7 +145,7 @@ impl Fvad {
     /// - `Some(false)` on no active voice detection
     /// - `None` on invalid frame length
     pub fn is_voice_frame(&mut self, frame: &[i16]) -> Option<bool> {
-        match unsafe { ffi::fvad_process(self.fvad, frame.as_ptr(), frame.len() as u64) } {
+        match unsafe { ffi::fvad_process(self.fvad, frame.as_ptr(), frame.len()) } {
             -1 => None,
             0 => Some(false),
             1 => Some(true),
